@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sniper</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<style>
+  h2 {color:#47423c}
+  .clickbox { position: absolute; top: 0; left: 0; display: inline-block; width: 100%; height: 100%; z-index: 5; }
+  .clickbox:hover { outline: 3px solid #E0EBEF; }
+  .wrap { width: 100%; height: 400px; padding: 0; overflow: hidden; border: 4px solid whitesmoke; }
+  .frame { width: 1280px; height: 900px; border: 0; transform: scale(0.43); transform-origin: 0 0; }
+  .frame-mobile { width: 100%; height: 786px; border: 0; transform: scale(1); transform-origin: 0 0; }
+  .wrap-mobile { width: 100%; height: 800px; padding: 0; overflow: hidden; border: 4px solid whitesmoke; }
+  .copy-btn { margin-top: 10px; }
+  .source-code { display: none; white-space: pre-wrap; background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+</style>
+</head>
+
+<body>
+
+
+<section class="py-3 bottomline">
+<div class="container">
+<div class="row">
+<div class="col-12">
+<h1 class="" style="">SNIPPER</h1>
+<h3>Design System</h3>
+<h4 class="" style="">Plug and play info-product HTML/CSS components for any User Interface</h4>
+
+
+<div class="btn-group btn-group-toggle" style="height:35px">
+<a id="btn-desktop" class="btn btn-secondary active"><i class="fa fa-desktop pr-2" aria-hidden="true"></i>Desktop</a>
+<a id="btn-mobile" class="btn btn-secondary"><i style="font-size:20px" class="fa fa-mobile pr-2" aria-hidden="true"></i>Mobile</a>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<script>
+  $("#btn-mobile").click(function(){
+    $(this).addClass("active");
+    $("#btn-desktop").removeClass("active");
+    $("iframe").addClass("frame-mobile");
+    $(".wrap").addClass("wrap-mobile");
+  });
+
+  $("#btn-desktop").click(function(){
+    $(this).addClass("active");
+    $("#btn-mobile").removeClass("active");
+    $("iframe").removeClass("frame-mobile");
+    $("iframe").addClass("frame");
+    $(".wrap-mobile").removeClass("wrap-mobile");
+  });
+
+// Function to copy iframe content without <html>, <head>, and <body> tags
+  function copyIframeSource(button) {
+  const iframe = button.previousElementSibling.querySelector('iframe');
+  const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+  // Get only the inner HTML of the <body> tag
+  const sourceCode = iframeDocument.body.innerHTML;
+
+  navigator.clipboard.writeText(sourceCode).then(() => {
+    button.textContent = "Copied!";
+    setTimeout(() => {
+      button.textContent = "Copy iframe source code";
+    }, 2000);
+  }).catch(err => {
+    alert('Failed to copy: ' + err);
+  });
+}
+
+// Function to toggle iframe content view (between UI and source code)
+function toggleSourceCode(button) {
+  const wrapDiv = button.previousElementSibling;
+  const iframe = wrapDiv.querySelector('iframe');
+  const sourceCodeDiv = wrapDiv.nextElementSibling;
+
+  if (iframe.style.display !== "none") {
+    // Show the source code
+    const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+    const sourceCode = iframeDocument.body.innerHTML;
+    sourceCodeDiv.textContent = sourceCode;
+    iframe.style.display = "none";
+    sourceCodeDiv.style.display = "block";
+    button.textContent = "Show UI";
+  } else {
+    // Show the iframe (UI view)
+    iframe.style.display = "block";
+    sourceCodeDiv.style.display = "none";
+    button.textContent = "Show source HTML code";
+  }
+}
+
+</script>
+
+<section style="">
+<div class="container">
+<div class="row">
+
+<div class="col-12 mt-3">
+  <div style="height: 10px; background:whitesmoke"></div>
+  <h3 class="pt-4 pb-0">Simply copy and paste what you need into your project</h3>
+</div>
+
+<!-- First iframe and buttons -->
+<div data-aos="zoom-in" class="col-md-6 py-3 my-3">
+  <h2>Benefits table</h2>
+  <div class="wrap mb-3">
+    <iframe class="frame" src="module-activitycalendar.html"></iframe>
+  </div>
+  <button class="btn btn-primary copy-btn" onclick="copyIframeSource(this)">Copy iframe source code</button>
+  <button class="btn btn-secondary copy-btn" onclick="toggleSourceCode(this)">Show source HTML code</button>
+  <pre class="source-code"></pre>
+</div>
+
+<!-- Second iframe and buttons -->
+<div data-aos="zoom-in" class="col-md-6 py-3 my-3">
+  <h2>Funnel</h2>
+  <div class="wrap mb-3">
+    <iframe class="frame" src="module-bizsequence.html"></iframe>
+  </div>
+  <button class="btn btn-primary copy-btn" onclick="copyIframeSource(this)">Copy iframe source code</button>
+  <button class="btn btn-secondary copy-btn" onclick="toggleSourceCode(this)">Show source HTML code</button>
+  <pre class="source-code"></pre>
+</div>
+
+<div class="col-12 mt-3">
+  <div style="height: 10px; background:whitesmoke"></div>
+  <h1 class="pt-4 pb-0">Extras and use cases</h1>
+</div>
+
+<!-- Third iframe and buttons -->
+<div data-aos="zoom-in" class="col-md-6 py-3 my-3">
+  <h2>Benefits table</h2>
+  <div class="wrap mb-3">
+    <iframe class="frame" src="module-benefitstable.html"></iframe>
+  </div>
+  <button class="btn btn-primary copy-btn" onclick="copyIframeSource(this)">Copy iframe source code</button>
+  <button class="btn btn-secondary copy-btn" onclick="toggleSourceCode(this)">Show source HTML code</button>
+  <pre class="source-code"></pre>
+</div>
+
+<!-- Fourth iframe and buttons -->
+<div data-aos="zoom-in" class="col-md-6 py-3 my-3">
+  <h2>Step to success</h2>
+  <div class="wrap mb-3">
+    <iframe class="frame" src="module-swot.html"></iframe>
+  </div>
+  <button class="btn btn-primary copy-btn" onclick="copyIframeSource(this)">Copy iframe source code</button>
+  <button class="btn btn-secondary copy-btn" onclick="toggleSourceCode(this)">Show source HTML code</button>
+  <pre class="source-code"></pre>
+</div>
+
+</div>
+</div>
+</section>
+
+</body>
+</html>
